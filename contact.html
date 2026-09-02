@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact 612 Promise</title>
+</head>
+<body>
+<style>
+  :root{
+    --navy-950:#0c1526;
+    --navy-900:#101d33;
+    --navy-800:#16294a;
+    --navy-700:#1e3560;
+    --gold-500:#c9a24b;
+    --gold-400:#dab96a;
+    --cream-100:#f4ecda;
+    --cream-50:#faf6ec;
+    --ink-900:#161310;
+    --line:rgba(201,162,75,0.28);
+    --bg:var(--cream-50);
+    --surface:#ffffff;
+    --text:var(--ink-900);
+    --text-dim:#5b5348;
+    --accent:var(--gold-500);
+    --accent-ink:var(--navy-950);
+    --hero-bg:var(--navy-950);
+    --hero-text:var(--cream-100);
+    --input-bg:#ffffff;
+    --input-border:rgba(22,19,16,0.16);
+    --focus:var(--navy-800);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:var(--navy-950);
+      --surface:#132038;
+      --text:var(--cream-100);
+      --text-dim:rgba(244,236,218,0.66);
+      --line:rgba(201,162,75,0.22);
+      --input-bg:#0f1c30;
+      --input-border:rgba(244,236,218,0.18);
+      --focus:var(--gold-500);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:var(--navy-950);
+    --surface:#132038;
+    --text:var(--cream-100);
+    --text-dim:rgba(244,236,218,0.66);
+    --line:rgba(201,162,75,0.22);
+    --input-bg:#0f1c30;
+    --input-border:rgba(244,236,218,0.18);
+    --focus:var(--gold-500);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Libre Franklin',sans-serif;line-height:1.5;}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;font-weight:600;text-wrap:balance;}
+  a{color:inherit;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px;}
+  .topbar{background:var(--hero-bg);border-bottom:1px solid var(--line);}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.05em;color:var(--hero-text);text-decoration:none;font-size:1rem;}
+  .brand-mark{height:30px;width:auto;flex:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));}
+  .back{font-size:0.78rem;color:rgba(244,236,218,0.7);text-decoration:none;letter-spacing:0.04em;}
+  .back:hover{color:var(--gold-400);}
+  main{padding:56px 0 80px;}
+  .eyebrow{font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);}
+  h1{font-size:clamp(1.7rem,4vw,2.3rem);margin:10px 0 14px;color:var(--text);}
+  .lede{font-size:1.02rem;color:var(--text-dim);max-width:60ch;margin:0 0 36px;}
+  form{display:grid;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:32px;}
+  .row{display:grid;gap:20px;grid-template-columns:1fr 1fr;}
+  @media (max-width:560px){.row{grid-template-columns:1fr;}}
+  label{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px;}
+  .field{display:flex;flex-direction:column;}
+  input, select, textarea{
+    font-family:'Libre Franklin',sans-serif;
+    font-size:0.98rem;
+    padding:11px 13px;
+    border:1px solid var(--input-border);
+    border-radius:5px;
+    background:var(--input-bg);
+    color:var(--text);
+    width:100%;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:none;
+    border-color:var(--focus);
+    box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
+  }
+  textarea{resize:vertical;min-height:120px;font-family:inherit;}
+  .required::after{content:" *";color:var(--gold-500);}
+  .hint{font-size:0.82rem;color:var(--text-dim);margin-top:-4px;}
+  .submit-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:0.86rem;
+    letter-spacing:0.03em;padding:13px 26px;border-radius:5px;border:1px solid transparent;
+    cursor:pointer;text-decoration:none;transition:transform 0.15s ease, filter 0.15s ease;
+  }
+  .btn:hover{filter:brightness(1.06);}
+  .btn:active{transform:translateY(1px);}
+  .btn-gold{background:var(--accent);color:var(--accent-ink);}
+  .status{font-size:0.86rem;color:var(--text-dim);}
+  .status.ok{color:#3f7a4a;}
+  :root:not([data-theme="light"]) .status.ok{color:#7fce8f;}
+  :root[data-theme="dark"] .status.ok{color:#7fce8f;}
+  .status.err{color:#b3462c;}
+  .note{margin-top:18px;font-size:0.82rem;color:var(--text-dim);}
+  .note a{color:var(--focus);text-decoration:underline;}
+  .sponsor-box{margin-top:44px;padding:22px 24px;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
+  .sponsor-box h2{font-size:1rem;margin:0 0 8px;color:var(--text);}
+  .sponsor-box p{margin:0;color:var(--text-dim);font-size:0.92rem;}
+  .sponsor-box p + p{margin-top:8px;}
+  footer{border-top:1px solid var(--line);padding:22px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.78rem;color:var(--text-dim);}
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Franklin:wght@400;500;600;700&display=swap">
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">612 PROMISE</span>
+    <a class="back" href="/">&larr; Back to main site</a>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h1>Contact &amp; sponsorship inquiries</h1>
+    <p class="lede">612 Promise is a registered 501(c)(3) nonprofit serving disadvantaged kids across South Minneapolis and the Twin Cities &mdash; every corporate sponsorship and donation is tax-deductible. Whether you're a business interested in sponsoring the program or a family with a question, fill out the form below and it'll open a pre-filled email to <strong>612promisecharity@gmail.com</strong> for you to send.</p>
+
+    <form id="contact-form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="name" class="required">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="org">Company / organization</label>
+          <input type="text" id="org" name="org" autocomplete="organization" placeholder="If a corporate sponsor inquiry">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="email" class="required">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="reason" class="required">What's this about?</label>
+        <select id="reason" name="reason" required>
+          <option value="">Select one&hellip;</option>
+          <option value="Corporate Sponsorship Inquiry">Corporate sponsorship inquiry</option>
+          <option value="Registration Question">Registration question</option>
+          <option value="Volunteer / Coaching">Volunteer or coaching interest</option>
+          <option value="General Question">General question</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message" class="required">Message</label>
+        <textarea id="message" name="message" required placeholder="Tell us a bit about your inquiry&hellip;"></textarea>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn btn-gold">Send message</button>
+        <span class="status" id="form-status"></span>
+      </div>
+      <p class="note">This opens your email app with your message ready to send &mdash; nothing is sent until you hit send there. Prefer to email directly? Write to <a href="mailto:612promisecharity@gmail.com">612promisecharity@gmail.com</a>.</p>
+    </form>
+
+    <div class="sponsor-box">
+      <h2>Why sponsor 612 Promise?</h2>
+      <p>612 Promise fields a full-contact tackle team every fall in The League (AYFL Metro), and runs flag football and regional 7v7 tournaments year-round &mdash; serving kids in 3rd&ndash;8th grade across South Minneapolis, including families near Armitage, Lynnhurst, Pearl Park, and Linden Hills Park.</p>
+      <p>Sponsorship dollars go directly to gear, transportation (we run two 12-passenger vans), league fees, and coaching &mdash; and because we're a 501(c)(3), your contribution is tax-deductible.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 612 Promise</span>
+    <span>South Minneapolis &amp; the Twin Cities</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var status = document.getElementById('form-status');
+    var name = document.getElementById('name').value.trim();
+    var org = document.getElementById('org').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var reason = document.getElementById('reason').value;
+    var message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !reason || !message) {
+      status.textContent = 'Please fill in your name, email, topic, and message.';
+      status.className = 'status err';
+      return;
+    }
+
+    var subject = '612 Promise — ' + reason;
+    var bodyLines = [
+      'Name: ' + name,
+      org ? 'Organization: ' + org : null,
+      'Email: ' + email,
+      phone ? 'Phone: ' + phone : null,
+      '',
+      message
+    ].filter(function (l) { return l !== null; });
+
+    var mailto = 'mailto:612promisecharity@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+    status.textContent = 'Opening your email app…';
+    status.className = 'status ok';
+    window.location.href = mailto;
+  });
+</script>
+</body>
+</html>
