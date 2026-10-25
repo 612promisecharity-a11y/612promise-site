@@ -29,6 +29,8 @@
     --input-bg:#ffffff;
     --input-border:rgba(22,19,16,0.16);
     --focus:var(--navy-800);
+    --ok:#3f7a4a;
+    --err:#b3462c;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -40,6 +42,9 @@
       --input-bg:#0f1c30;
       --input-border:rgba(244,236,218,0.18);
       --focus:var(--gold-500);
+      --ok:#7fce8f;
+      --err:#f0896b;
+      color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
@@ -51,6 +56,9 @@
     --input-bg:#0f1c30;
     --input-border:rgba(244,236,218,0.18);
     --focus:var(--gold-500);
+    --ok:#7fce8f;
+    --err:#f0896b;
+    color-scheme:dark;
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:'Libre Franklin',sans-serif;line-height:1.5;}
@@ -60,7 +68,6 @@
   .topbar{background:var(--hero-bg);border-bottom:1px solid var(--line);}
   .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
   .brand{display:flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.05em;color:var(--hero-text);text-decoration:none;font-size:1rem;}
-  .brand-mark{height:30px;width:auto;flex:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));}
   .back{font-size:0.78rem;color:rgba(244,236,218,0.7);text-decoration:none;letter-spacing:0.04em;}
   .back:hover{color:var(--gold-400);}
   main{padding:56px 0 80px;}
@@ -68,49 +75,32 @@
   h1{font-size:clamp(1.7rem,4vw,2.3rem);margin:10px 0 14px;color:var(--text);}
   .lede{font-size:1.02rem;color:var(--text-dim);max-width:60ch;margin:0 0 36px;}
   form{display:grid;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:32px;}
+  @media (max-width:560px){form{padding:22px;}}
   .row{display:grid;gap:20px;grid-template-columns:1fr 1fr;}
   @media (max-width:560px){.row{grid-template-columns:1fr;}}
   label{display:block;font-size:0.78rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px;}
-  .field{display:flex;flex-direction:column;}
-  input, select, textarea{
-    font-family:'Libre Franklin',sans-serif;
-    font-size:0.98rem;
-    padding:11px 13px;
-    border:1px solid var(--input-border);
-    border-radius:5px;
-    background:var(--input-bg);
-    color:var(--text);
-    width:100%;
-  }
-  input:focus, select:focus, textarea:focus{
-    outline:none;
-    border-color:var(--focus);
-    box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);
-  }
+  .field{display:flex;flex-direction:column;min-width:0;}
+  input, select, textarea{font-family:'Libre Franklin',sans-serif;font-size:0.98rem;padding:11px 13px;border:1px solid var(--input-border);border-radius:5px;background:var(--input-bg);color:var(--text);width:100%;}
+  input:focus, select:focus, textarea:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 22%, transparent);}
   textarea{resize:vertical;min-height:120px;font-family:inherit;}
   .required::after{content:" *";color:var(--gold-500);}
-  .hint{font-size:0.82rem;color:var(--text-dim);margin-top:-4px;}
   .submit-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:4px;}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:0.86rem;
-    letter-spacing:0.03em;padding:13px 26px;border-radius:5px;border:1px solid transparent;
-    cursor:pointer;text-decoration:none;transition:transform 0.15s ease, filter 0.15s ease;
-  }
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:0.86rem;letter-spacing:0.03em;padding:13px 26px;border-radius:5px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform 0.15s ease, filter 0.15s ease;}
   .btn:hover{filter:brightness(1.06);}
   .btn:active{transform:translateY(1px);}
+  .btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px;}
   .btn-gold{background:var(--accent);color:var(--accent-ink);}
   .status{font-size:0.86rem;color:var(--text-dim);}
-  .status.ok{color:#3f7a4a;}
-  :root:not([data-theme="light"]) .status.ok{color:#7fce8f;}
-  :root[data-theme="dark"] .status.ok{color:#7fce8f;}
-  .status.err{color:#b3462c;}
-  .note{margin-top:18px;font-size:0.82rem;color:var(--text-dim);}
+  .status.ok{color:var(--ok);}
+  .status.err{color:var(--err);}
+  .note{margin:0;font-size:0.82rem;color:var(--text-dim);}
   .note a{color:var(--focus);text-decoration:underline;}
   .sponsor-box{margin-top:44px;padding:22px 24px;border:1px solid var(--line);border-radius:8px;background:var(--surface);}
-  .sponsor-box h2{font-size:1rem;margin:0 0 8px;color:var(--text);}
-  .sponsor-box p{margin:0;color:var(--text-dim);font-size:0.92rem;}
-  .sponsor-box p + p{margin-top:8px;}
+  .sponsor-box h2{font-size:1rem;margin:0 0 12px;color:var(--text);}
+  .tiers{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:0.92rem;color:var(--text-dim);}
+  .tiers b{color:var(--text);font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:0.02em;}
+  .sponsor-box p{margin:14px 0 0;color:var(--text-dim);font-size:0.88rem;}
+  .sponsor-box a{color:var(--focus);}
   footer{border-top:1px solid var(--line);padding:22px 0;}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:0.78rem;color:var(--text-dim);}
 </style>
@@ -127,8 +117,8 @@
 <main>
   <div class="wrap">
     <span class="eyebrow">Get in touch</span>
-    <h1>Contact &amp; sponsorship inquiries</h1>
-    <p class="lede">612 Promise is a registered 501(c)(3) nonprofit serving disadvantaged kids across South Minneapolis and the Twin Cities &mdash; every corporate sponsorship and donation is tax-deductible. Whether you're a business interested in sponsoring the program or a family with a question, fill out the form below and it'll open a pre-filled email to <strong>612promisecharity@gmail.com</strong> for you to send.</p>
+    <h1>Contact 612 Promise</h1>
+    <p class="lede">Questions about winter tryouts, entering a team in the Jingle Bowl, or sponsoring the program? Fill out the form. It opens a pre-filled email to <strong>612promisecharity@gmail.com</strong> for you to send.</p>
 
     <form id="contact-form" novalidate>
       <div class="row">
@@ -137,8 +127,8 @@
           <input type="text" id="name" name="name" required autocomplete="name">
         </div>
         <div class="field">
-          <label for="org">Company / organization</label>
-          <input type="text" id="org" name="org" autocomplete="organization" placeholder="If a corporate sponsor inquiry">
+          <label for="org">Team, company or organization</label>
+          <input type="text" id="org" name="org" autocomplete="organization">
         </div>
       </div>
 
@@ -157,11 +147,12 @@
         <label for="reason" class="required">What's this about?</label>
         <select id="reason" name="reason" required>
           <option value="">Select one&hellip;</option>
-          <option value="Corporate Sponsorship Inquiry">Corporate sponsorship inquiry</option>
-          <option value="Registration Question">Registration question</option>
+          <option value="Winter Flag Tryouts / Registration">Winter flag tryouts or registration</option>
+          <option value="Jingle Bowl Team Entry">Enter a team in the Jingle Bowl</option>
+          <option value="Sponsorship Inquiry">Sponsorship (Presenting, Jersey or Team Supporter)</option>
+          <option value="Scholarship Question">Scholarship question</option>
           <option value="Volunteer / Coaching">Volunteer or coaching interest</option>
           <option value="General Question">General question</option>
-          <option value="Other">Other</option>
         </select>
       </div>
 
@@ -172,27 +163,37 @@
 
       <div class="submit-row">
         <button type="submit" class="btn btn-gold">Send message</button>
-        <span class="status" id="form-status"></span>
+        <span class="status" id="form-status" role="status"></span>
       </div>
-      <p class="note">This opens your email app with your message ready to send &mdash; nothing is sent until you hit send there. Prefer to email directly? Write to <a href="mailto:612promisecharity@gmail.com">612promisecharity@gmail.com</a>.</p>
+      <p class="note">This opens your email app with your message ready to send. Nothing is sent until you send it there. You can also write to us directly at 612promisecharity@gmail.com.</p>
     </form>
 
     <div class="sponsor-box">
-      <h2>Why sponsor 612 Promise?</h2>
-      <p>612 Promise fields a full-contact tackle team every fall in The League (AYFL Metro), and runs flag football and regional 7v7 tournaments year-round &mdash; serving kids in 3rd&ndash;8th grade across South Minneapolis, including families near Armitage, Lynnhurst, Pearl Park, and Linden Hills Park.</p>
-      <p>Sponsorship dollars go directly to gear, transportation (we run two 12-passenger vans), league fees, and coaching &mdash; and because we're a 501(c)(3), your contribution is tax-deductible.</p>
+      <h2>Sponsorship packages</h2>
+      <ul class="tiers">
+        <li><b>Presenting Sponsor &middot; $2,500</b> &mdash; your logo on the front of every jersey, plus naming on the program and the Jingle Bowl (1 available)</li>
+        <li><b>Jersey Sponsor &middot; $1,000</b> &mdash; your logo on a sleeve or on the back (3 available)</li>
+        <li><b>Team Supporter &middot; $500</b> &mdash; your name on the Jingle Bowl banner and our website</li>
+      </ul>
+      <p>Jersey logos are due Nov 15. <a href="/#support">See the full packages</a>.</p>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 612 Promise</span>
+    <span>&copy; 2026 612 Promise &middot; 501(c)(3) nonprofit</span>
     <span>South Minneapolis &amp; the Twin Cities</span>
   </div>
 </footer>
 
 <script>
+  (function () {
+    var map = { winter: 'Winter Flag Tryouts / Registration', 'jingle-bowl': 'Jingle Bowl Team Entry', sponsor: 'Sponsorship Inquiry' };
+    var key = (location.hash || '').replace('#', '');
+    if (map[key]) document.getElementById('reason').value = map[key];
+  })();
+
   document.getElementById('contact-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var status = document.getElementById('form-status');
@@ -204,7 +205,7 @@
     var message = document.getElementById('message').value.trim();
 
     if (!name || !email || !reason || !message) {
-      status.textContent = 'Please fill in your name, email, topic, and message.';
+      status.textContent = 'Please fill in your name, email, topic and message.';
       status.className = 'status err';
       return;
     }
@@ -212,7 +213,7 @@
     var subject = '612 Promise — ' + reason;
     var bodyLines = [
       'Name: ' + name,
-      org ? 'Organization: ' + org : null,
+      org ? 'Team / organization: ' + org : null,
       'Email: ' + email,
       phone ? 'Phone: ' + phone : null,
       '',
@@ -223,10 +224,11 @@
       + '?subject=' + encodeURIComponent(subject)
       + '&body=' + encodeURIComponent(bodyLines.join('\n'));
 
-    status.textContent = 'Opening your email app…';
+    status.textContent = 'Opening your email app. If nothing opens, email 612promisecharity@gmail.com directly.';
     status.className = 'status ok';
     window.location.href = mailto;
   });
 </script>
+
 </body>
 </html>
