@@ -118,7 +118,7 @@
   <div class="wrap">
     <span class="eyebrow">Get in touch</span>
     <h1>Contact 612 Promise</h1>
-    <p class="lede">Questions about winter tryouts, entering a team in the Jingle Bowl, or sponsoring the program? Fill out the form. It opens a pre-filled email to <strong>612promisecharity@gmail.com</strong> for you to send.</p>
+    <p class="lede">Questions about winter tryouts, our Holiday Classic or Jingle Bowl tournaments, or sponsoring the program? Fill out the form. It opens a pre-filled email to <strong>612promisecharity@gmail.com</strong> for you to send.</p>
 
     <form id="contact-form" novalidate>
       <div class="row">
@@ -148,8 +148,9 @@
         <select id="reason" name="reason" required>
           <option value="">Select one&hellip;</option>
           <option value="Winter Flag Tryouts / Registration">Winter flag tryouts or registration</option>
-          <option value="Jingle Bowl Team Entry">Enter a team in the Jingle Bowl</option>
-          <option value="Sponsorship Inquiry">Sponsorship (Presenting, Jersey or Team Supporter)</option>
+          <option value="Holiday Classic Question">Twin Cities Holiday Classic (Nov 29)</option>
+          <option value="Jingle Bowl Team Entry">612 Jingle Bowl (December)</option>
+          <option value="Sponsorship Inquiry">Sponsorship (Presenting, Tournament or Team Sponsor)</option>
           <option value="Scholarship Question">Scholarship question</option>
           <option value="Volunteer / Coaching">Volunteer or coaching interest</option>
           <option value="General Question">General question</option>
@@ -171,11 +172,11 @@
     <div class="sponsor-box">
       <h2>Sponsorship packages</h2>
       <ul class="tiers">
-        <li><b>Presenting Sponsor &middot; $2,500</b> &mdash; your logo on the front of every jersey, plus naming on the program and the Jingle Bowl (1 available)</li>
-        <li><b>Jersey Sponsor &middot; $1,000</b> &mdash; your logo on a sleeve or on the back (3 available)</li>
-        <li><b>Team Supporter &middot; $500</b> &mdash; your name on the Jingle Bowl banner and our website</li>
+        <li><b>Presenting Sponsor &middot; $2,500</b> &mdash; your logo on the front of every jersey, plus naming on the program and both tournaments (1 available)</li>
+        <li><b>Tournament Sponsor &middot; $1,000</b> &mdash; your logo on the banners at the Holiday Classic and the Jingle Bowl (5 available)</li>
+        <li><b>Team Sponsor &middot; $500</b> &mdash; your name on the sponsor banner at both tournaments and on our website</li>
       </ul>
-      <p>Jersey logos are due Nov 15. <a href="/#support">See the full packages</a>.</p>
+      <p>The Presenting Sponsor's logo is due Nov 15. <a href="/#support">See the full packages</a>.</p>
     </div>
   </div>
 </main>
@@ -189,7 +190,7 @@
 
 <script>
   (function () {
-    var map = { winter: 'Winter Flag Tryouts / Registration', 'jingle-bowl': 'Jingle Bowl Team Entry', sponsor: 'Sponsorship Inquiry' };
+    var map = { winter: 'Winter Flag Tryouts / Registration', 'holiday-classic': 'Holiday Classic Question', 'jingle-bowl': 'Jingle Bowl Team Entry', sponsor: 'Sponsorship Inquiry' };
     var key = (location.hash || '').replace('#', '');
     if (map[key]) document.getElementById('reason').value = map[key];
   })();
